@@ -1,3 +1,5 @@
+import { UpdateSubject } from '../../../store/types/types';
+
 export type StudentsCountInputProps = {
-  countStudents: string;
+  action: UpdateSubject;
 };

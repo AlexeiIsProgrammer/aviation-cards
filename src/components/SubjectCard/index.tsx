@@ -3,7 +3,7 @@ import { IconBookFilled } from '@tabler/icons-react';
 import { Card, Col } from 'react-bootstrap';
 import SubjectTable from '../SubjectTable';
 import { SubjectCardProps } from './types/types';
-import SubjectHeader from '../SubjectHeader';
+import SubjectCardHeader from '../SubjectCardHeader';
 import './styles.scss';
 
 const SubjectCard = ({ subject }: SubjectCardProps) => {
@@ -17,7 +17,7 @@ const SubjectCard = ({ subject }: SubjectCardProps) => {
             <IconBookFilled width="2rem" />
             {subjectName}
           </Card.Title>
-          <SubjectHeader subject={subject} />
+          <SubjectCardHeader subject={subject} />
           <SubjectTable subject={subject} />
         </Card.Body>
       </Card>

@@ -3,6 +3,7 @@ import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import SubjectsAPI from '../../API';
 import { SubjectsResponseData } from '../../API/types/interfaces';
 import { SubjectsState } from '../types/interfaces';
+import { UpdateSubjectAction } from '../types/types';
 
 export const fetchSubjects = createAsyncThunk(
   'currency/fetchSubjects',
@@ -33,19 +34,24 @@ export const subjectsSlice = createSlice({
   initialState,
   reducers: {
     removeSubgroup(state: SubjectsState, { payload }) {
-      state.subjects
-        .find((el) => el.uniqueId === payload)
-        ?.podgroups.splice(0, 1);
+      const searchedSubject = state.subjects.find(
+        (el) => el.uniqueId === payload
+      );
+      if (searchedSubject) {
+        searchedSubject.podgroups.splice(1);
+        searchedSubject.countPodgroups =
+          searchedSubject.podgroups.length.toString();
+      }
     },
     addSubgroup(state: SubjectsState, { payload }) {
-      const changedSubject = state.subjects.find(
+      const searchedSubject = state.subjects.find(
         (el) => el.uniqueId === payload
       );
 
-      if (changedSubject) {
-        const totalCount = +changedSubject.podgroups[0].countStudents;
+      if (searchedSubject) {
+        const totalCount = +searchedSubject.podgroups[0].countStudents;
 
-        changedSubject.podgroups.push({
+        searchedSubject.podgroups.push({
           countStudents: String(Math.floor(totalCount / 2)),
           laboratoryTeacher: '',
           lectureTeacher: '',
@@ -55,10 +61,33 @@ export const subjectsSlice = createSlice({
           offsetTeacher: '',
         });
 
-        changedSubject.podgroups[0].countStudents = String(
+        searchedSubject.podgroups[0].countStudents = String(
           Math.round(totalCount / 2)
         );
+
+        searchedSubject.countPodgroups =
+          searchedSubject.podgroups.length.toString();
       }
+    },
+    updateSubject(
+      state: SubjectsState,
+      { payload }: { payload: UpdateSubjectAction[] }
+    ) {
+      payload.forEach((payloadAction) => {
+        const { id, value, action, podgroup } = payloadAction;
+
+        const searchedElement = state.subjects.find(
+          (subject) => subject.uniqueId === id
+        );
+
+        if (searchedElement) {
+          if (podgroup !== undefined) {
+            searchedElement.podgroups[podgroup][action] = value;
+          } else {
+            searchedElement[action] = value;
+          }
+        }
+      });
     },
   },
   extraReducers(builder) {
@@ -82,6 +111,7 @@ export const subjectsSlice = createSlice({
   },
 });
 
-export const { removeSubgroup, addSubgroup } = subjectsSlice.actions;
+export const { removeSubgroup, addSubgroup, updateSubject } =
+  subjectsSlice.actions;
 
 export default subjectsSlice.reducer;
