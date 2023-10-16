@@ -44,7 +44,13 @@ function App() {
   return (
     <Container>
       <Row>{content}</Row>
-      <Button variant="success" onClick={() => dispatch(changeSubjectsData())}>
+      <Button
+        className="mt-2"
+        style={{ width: '100%' }}
+        size="lg"
+        variant="success"
+        onClick={() => dispatch(changeSubjectsData())}
+      >
         Сохранить
       </Button>
     </Container>

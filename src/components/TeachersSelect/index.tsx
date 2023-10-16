@@ -37,13 +37,14 @@ const TeachersSelect = ({
   };
 
   return (
-    <InputGroup className="mb-3">
+    <InputGroup className="mb-3 d-flex flex-row flex-nowrap">
       <Form.Select
         disabled={isDisabled}
         onChange={(e) => {
           dispatch(updateSubject([{ ...action, value: e.target.value }]));
         }}
         value={selectValue}
+        style={{ minWidth: '120px' }}
       >
         <option value="-1">Вакансия</option>
 

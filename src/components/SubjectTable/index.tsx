@@ -30,7 +30,7 @@ const SubjectTable = ({ subject }: SubjectCardProps) => {
   }
 
   return (
-    <Table striped bordered hover variant="light">
+    <Table responsive striped bordered hover variant="light">
       <SubjectTableHead subject={subject} />
       <tbody>
         <LecturesRow subject={subject} />
