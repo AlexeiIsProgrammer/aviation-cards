@@ -1,4 +1,3 @@
-import React from 'react';
 import { IconTrashFilled, IconCirclePlus } from '@tabler/icons-react';
 import { addSubgroup, removeSubgroup } from '../../store/slices/subjectsSlice';
 import { useAppDispatch } from '../../hooks';

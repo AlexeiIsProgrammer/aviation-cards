@@ -1,4 +1,3 @@
-import React from 'react';
 import { Subject } from '../../API/types/interfaces';
 import TeachersSelect from '../TeachersSelect';
 

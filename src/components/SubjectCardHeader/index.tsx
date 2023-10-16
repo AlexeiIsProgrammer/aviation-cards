@@ -1,4 +1,3 @@
-import React from 'react';
 import { Table } from 'react-bootstrap';
 import { SubjectCardProps } from '../SubjectCard/types/types';
 import './styles.scss';

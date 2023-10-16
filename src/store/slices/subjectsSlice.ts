@@ -21,6 +21,25 @@ export const fetchSubjects = createAsyncThunk(
   }
 );
 
+export const changeSubjectsData = createAsyncThunk(
+  'currency/changeSubjectsData',
+  async (_, { getState }) => {
+    try {
+      const state: SubjectsState = getState() as SubjectsState;
+      const data = await SubjectsAPI.sendSubjectsData(state);
+      if (data) {
+        console.log(data);
+
+        return data;
+      }
+    } catch (e) {
+      if (e instanceof Error) {
+        throw new Error(e.message);
+      }
+    }
+  }
+);
+
 const initialState: SubjectsState = {
   subjects: [],
   teachers: [],
@@ -81,10 +100,10 @@ export const subjectsSlice = createSlice({
         );
 
         if (searchedElement) {
-          if (podgroup !== undefined) {
-            searchedElement.podgroups[podgroup][action] = value;
-          } else {
+          if (action === 'additionalInfo') {
             searchedElement[action] = value;
+          } else if (podgroup !== undefined) {
+            searchedElement.podgroups[podgroup][action] = value;
           }
         }
       });

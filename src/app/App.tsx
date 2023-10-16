@@ -3,7 +3,10 @@ import { Container, Row, Button } from 'react-bootstrap';
 import Spinner from 'react-bootstrap/Spinner';
 import Alert from 'react-bootstrap/Alert';
 import { useAppDispatch, useAppSelector } from '../hooks';
-import { fetchSubjects } from '../store/slices/subjectsSlice';
+import {
+  changeSubjectsData,
+  fetchSubjects,
+} from '../store/slices/subjectsSlice';
 import subjectsSelector from '../store/selectors';
 import SubjectCard from '../components/SubjectCard';
 
@@ -41,7 +44,9 @@ function App() {
   return (
     <Container>
       <Row>{content}</Row>
-      <Button variant="success">Сохранить</Button>
+      <Button variant="success" onClick={() => dispatch(changeSubjectsData())}>
+        Сохранить
+      </Button>
     </Container>
   );
 }

@@ -1,4 +1,3 @@
-import React from 'react';
 import StudentsCountInput from '../StudentsCountInput';
 import { Subject } from '../../API/types/interfaces';
 

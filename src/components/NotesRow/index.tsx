@@ -1,4 +1,3 @@
-import React from 'react';
 import { Form } from 'react-bootstrap';
 import { Subject } from '../../API/types/interfaces';
 import { useAppDispatch } from '../../hooks';

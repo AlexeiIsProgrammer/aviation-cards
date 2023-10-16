@@ -1,8 +1,8 @@
-import { SubjectsActions } from '../../constants';
+import { SubjectsActionsType } from '../../constants';
 
 export type UpdateSubject = {
   id: string;
-  action: SubjectsActions;
+  action: SubjectsActionsType;
   podgroup?: 0 | 1;
 };
 

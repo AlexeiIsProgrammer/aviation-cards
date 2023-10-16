@@ -1,4 +1,3 @@
-import React, { useEffect } from 'react';
 import Form from 'react-bootstrap/Form';
 import { Button, InputGroup } from 'react-bootstrap';
 import { IconSortDescending } from '@tabler/icons-react';
@@ -6,7 +5,7 @@ import { useAppDispatch, useAppSelector } from '../../hooks';
 import subjectsSelector from '../../store/selectors';
 import { TeachersSelectProps } from './types/types';
 import { updateSubject } from '../../store/slices/subjectsSlice';
-import { SubjectsActions } from '../../constants';
+import { SelectActions } from '../../constants';
 
 const TeachersSelect = ({
   isDisabled,
@@ -20,15 +19,21 @@ const TeachersSelect = ({
     ?.podgroups[action.podgroup || 0][action.action];
 
   const setAllValues = () => {
-    dispatch(
-      updateSubject(
-        Object.keys(SubjectsActions).map((subjectAction) => ({
-          ...action,
-          value: selectValue,
-          action: subjectAction,
-        }))
-      )
-    );
+    if (selectValue) {
+      dispatch(
+        updateSubject(
+          Object.keys(SelectActions).map((subjectAction) => {
+            return {
+              id: action.id,
+              podgroup: action.podgroup,
+              value: selectValue,
+              action:
+                SelectActions[subjectAction as keyof typeof SelectActions],
+            };
+          })
+        )
+      );
+    }
   };
 
   return (

@@ -1,5 +1,6 @@
 import axios from 'axios';
 import { SubjectsResponseData } from './types/interfaces';
+import { SubjectsState } from '../store/types/interfaces';
 
 export default class SubjectsAPI {
   private static baseGetURL = 'https://bgaa.by/test';
@@ -21,11 +22,18 @@ export default class SubjectsAPI {
     }
   }
 
-  public static async sendSubjectsData(): Promise<
-    SubjectsResponseData | undefined
-  > {
+  public static async sendSubjectsData(
+    state: SubjectsState
+  ): Promise<SubjectsResponseData | undefined> {
     try {
-      const response = await axios.put(this.baseSendURL);
+      const response = await axios.put(this.baseSendURL, state.subjects, {
+        headers: {
+          'Content-Type': 'application/json',
+          'Access-Control-Allow-Credentials': true,
+          'Access-Control-Allow-Origin': '*',
+          'Access-Control-Allow-Methods': 'GET,PUT,POST,DELETE,PATCH,OPTIONS',
+        },
+      });
 
       return response.data;
     } catch (e) {

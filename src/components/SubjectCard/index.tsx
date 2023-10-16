@@ -1,4 +1,3 @@
-import React from 'react';
 import { IconBookFilled } from '@tabler/icons-react';
 import { Card, Col } from 'react-bootstrap';
 import SubjectTable from '../SubjectTable';
