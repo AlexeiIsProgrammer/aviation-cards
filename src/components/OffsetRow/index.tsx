@@ -1,8 +1,7 @@
-import { Subject } from '../../API/types/interfaces';
 import TeachersSelect from '../TeachersSelect';
+import { OffsetRowProps } from './types/types';
 
-const OffsetRow = ({ subject }: { subject: Subject }) => {
-  const { podgroups, uniqueId } = subject;
+const OffsetRow = ({ podgroups, uniqueId }: OffsetRowProps) => {
   return (
     <tr>
       <td>Зачет</td>

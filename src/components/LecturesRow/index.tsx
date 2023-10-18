@@ -1,15 +1,17 @@
-import { Subject } from '../../API/types/interfaces';
 import TeachersSelect from '../TeachersSelect';
+import { LecturesRowProps } from './types/types';
 
-const LecturesRow = ({ subject }: { subject: Subject }) => {
-  const { lecturesHours, podgroups, uniqueId } = subject;
-
+const LecturesRow = ({
+  lecturesHours,
+  podgroups,
+  uniqueId,
+}: LecturesRowProps) => {
   return (
     <tr>
       <td>Лекции</td>
       <td>{lecturesHours}</td>
 
-      <td className="flex-centered-cell">
+      <td>
         <TeachersSelect
           withButton
           isDisabled={+lecturesHours === 0}
@@ -17,7 +19,7 @@ const LecturesRow = ({ subject }: { subject: Subject }) => {
         />
       </td>
       {podgroups[1] && (
-        <td className="flex-centered-cell">
+        <td>
           <TeachersSelect
             withButton
             isDisabled={+lecturesHours === 0}

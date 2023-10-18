@@ -1,10 +1,11 @@
+import { ChangeEvent } from 'react';
 import Form from 'react-bootstrap/Form';
 import { Button, InputGroup } from 'react-bootstrap';
 import { IconSortDescending } from '@tabler/icons-react';
 import { useAppDispatch, useAppSelector } from '../../hooks';
 import subjectsSelector from '../../store/selectors';
 import { TeachersSelectProps } from './types/types';
-import { updateSubject } from '../../store/slices/subjectsSlice';
+import { updateSubject } from '../../store/slices/subjectSlice';
 import { SelectActions } from '../../constants';
 
 const TeachersSelect = ({
@@ -36,13 +37,16 @@ const TeachersSelect = ({
     }
   };
 
+  const selectChooseHandle = (e: ChangeEvent<HTMLSelectElement>) => {
+    dispatch(updateSubject([{ ...action, value: e.target.value }]));
+  };
+
   return (
     <InputGroup className="mb-3 d-flex flex-row flex-nowrap">
       <Form.Select
         disabled={isDisabled}
-        onChange={(e) => {
-          dispatch(updateSubject([{ ...action, value: e.target.value }]));
-        }}
+        onChange={selectChooseHandle}
+        placeholder="Выбрать..."
         value={selectValue}
         style={{ minWidth: '120px' }}
       >
@@ -56,7 +60,11 @@ const TeachersSelect = ({
           ))}
       </Form.Select>
       {withButton && (
-        <Button onClick={setAllValues} variant="primary">
+        <Button
+          title="Установить для всех"
+          onClick={setAllValues}
+          variant="primary"
+        >
           <IconSortDescending color="white" />
         </Button>
       )}

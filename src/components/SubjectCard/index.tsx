@@ -6,17 +6,22 @@ import SubjectCardHeader from '../SubjectCardHeader';
 import './styles.scss';
 
 const SubjectCard = ({ subject }: SubjectCardProps) => {
-  const { subjectName } = subject;
+  const { subjectName, groupName, course, studentsNumber, semestr } = subject;
 
   return (
     <Col md={6}>
-      <Card>
+      <Card className="mt-4">
         <Card.Body>
-          <Card.Title className="card__style">
+          <Card.Title className="card__title">
             <IconBookFilled width="2rem" />
             {subjectName}
           </Card.Title>
-          <SubjectCardHeader subject={subject} />
+          <SubjectCardHeader
+            groupName={groupName}
+            course={course}
+            studentsNumber={studentsNumber}
+            semestr={semestr}
+          />
           <SubjectTable subject={subject} />
         </Card.Body>
       </Card>

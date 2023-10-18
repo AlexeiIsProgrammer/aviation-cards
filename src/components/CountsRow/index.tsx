@@ -1,9 +1,7 @@
 import StudentsCountInput from '../StudentsCountInput';
-import { Subject } from '../../API/types/interfaces';
+import { CountsRowProps } from './types/types';
 
-const CountsRow = ({ subject }: { subject: Subject }) => {
-  const { podgroups, uniqueId } = subject;
-
+const CountsRow = ({ podgroups, uniqueId }: CountsRowProps) => {
   return podgroups.length > 1 ? (
     <tr>
       <td>Количество человек</td>

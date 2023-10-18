@@ -1,9 +1,8 @@
-/* eslint-disable @typescript-eslint/no-use-before-define */
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
-import SubjectsAPI from '../../API';
-import { SubjectsResponseData } from '../../API/types/interfaces';
-import { SubjectsState } from '../types/interfaces';
-import { UpdateSubjectAction } from '../types/types';
+import SubjectsAPI from '../../../API';
+import { SubjectsResponseData } from '../../../API/types/interfaces';
+import { SubjectsState } from '../../types/interfaces';
+import { UpdateSubjectAction } from '../../types/types';
 
 export const fetchSubjects = createAsyncThunk(
   'currency/fetchSubjects',
@@ -28,8 +27,6 @@ export const changeSubjectsData = createAsyncThunk(
       const state: SubjectsState = getState() as SubjectsState;
       const data = await SubjectsAPI.sendSubjectsData(state);
       if (data) {
-        console.log(data);
-
         return data;
       }
     } catch (e) {
@@ -116,7 +113,6 @@ export const subjectsSlice = createSlice({
     });
     builder.addCase(fetchSubjects.fulfilled, (state: SubjectsState, action) => {
       state.isLoading = false;
-
       if (action.payload) {
         state.subjects = action.payload.data;
         state.teachers = action.payload.teachers;

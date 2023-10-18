@@ -37,5 +37,6 @@ module.exports = {
         'react-hooks/exhaustive-deps': 0,
         'react/self-closing-comp': 0,
         'react/jsx-props-no-spreading': 0,
+        'import/no-extraneous-dependencies': 0,
     },
 };

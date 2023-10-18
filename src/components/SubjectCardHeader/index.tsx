@@ -1,9 +1,12 @@
 import { Table } from 'react-bootstrap';
-import { SubjectCardProps } from '../SubjectCard/types/types';
-import './styles.scss';
+import { SubjectCardHeaderProps } from './types/types';
 
-const SubjectCardHeader = ({ subject }: SubjectCardProps) => {
-  const { groupName, course, studentsNumber, semestr } = subject;
+const SubjectCardHeader = ({
+  groupName,
+  course,
+  studentsNumber,
+  semestr,
+}: SubjectCardHeaderProps) => {
   return (
     <Table striped variant="light">
       <tbody>

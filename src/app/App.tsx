@@ -6,7 +6,7 @@ import { useAppDispatch, useAppSelector } from '../hooks';
 import {
   changeSubjectsData,
   fetchSubjects,
-} from '../store/slices/subjectsSlice';
+} from '../store/slices/subjectSlice';
 import subjectsSelector from '../store/selectors';
 import SubjectCard from '../components/SubjectCard';
 
@@ -15,11 +15,27 @@ function App() {
 
   const { subjects, error, isLoading } = useAppSelector(subjectsSelector);
 
+  const saveChangesHandle = () => dispatch(changeSubjectsData());
+
+  useEffect(() => {
+    dispatch(fetchSubjects());
+  }, []);
+
   let content: JSX.Element | JSX.Element[];
 
   switch (true) {
     case isLoading:
-      content = <Spinner animation="border" />;
+      content = (
+        <Spinner
+          title="Loading"
+          animation="border"
+          style={{
+            position: 'absolute',
+            top: '50%',
+            left: '50%',
+          }}
+        />
+      );
       break;
 
     case error !== '':
@@ -31,28 +47,28 @@ function App() {
       break;
 
     default:
-      content = subjects.map((subject) => (
-        <SubjectCard key={subject.uniqueId} subject={subject} />
-      ));
+      content = (
+        <>
+          {subjects.map((subject) => (
+            <SubjectCard key={subject.uniqueId} subject={subject} />
+          ))}
+          <Button
+            className="mt-2"
+            style={{ width: '100%' }}
+            size="lg"
+            variant="success"
+            onClick={saveChangesHandle}
+          >
+            Сохранить
+          </Button>
+        </>
+      );
       break;
   }
-
-  useEffect(() => {
-    dispatch(fetchSubjects());
-  }, []);
 
   return (
     <Container>
       <Row>{content}</Row>
-      <Button
-        className="mt-2"
-        style={{ width: '100%' }}
-        size="lg"
-        variant="success"
-        onClick={() => dispatch(changeSubjectsData())}
-      >
-        Сохранить
-      </Button>
     </Container>
   );
 }

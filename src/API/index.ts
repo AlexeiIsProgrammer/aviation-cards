@@ -7,7 +7,6 @@ export default class SubjectsAPI {
 
   private static baseSendURL = 'https://bgaa.by/test_result';
 
-  // eslint-disable-next-line consistent-return
   public static async getSubjectsData(): Promise<
     SubjectsResponseData | undefined
   > {
@@ -26,12 +25,12 @@ export default class SubjectsAPI {
     state: SubjectsState
   ): Promise<SubjectsResponseData | undefined> {
     try {
-      const response = await axios.put(this.baseSendURL, state.subjects, {
+      const response = await axios.post(this.baseSendURL, state.subjects, {
         headers: {
           'Content-Type': 'application/json',
           'Access-Control-Allow-Credentials': true,
           'Access-Control-Allow-Origin': '*',
-          'Access-Control-Allow-Methods': 'GET,PUT,POST,DELETE,PATCH,OPTIONS',
+          'Access-Control-Allow-Methods': 'GET,PUT,POST',
         },
       });
 

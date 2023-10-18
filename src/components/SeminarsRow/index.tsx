@@ -1,8 +1,11 @@
-import { Subject } from '../../API/types/interfaces';
 import TeachersSelect from '../TeachersSelect';
+import { SeminarsRowProps } from './types/types';
 
-const SeminarsRow = ({ subject }: { subject: Subject }) => {
-  const { seminarHours, podgroups, uniqueId } = subject;
+const SeminarsRow = ({
+  seminarHours,
+  podgroups,
+  uniqueId,
+}: SeminarsRowProps) => {
   return (
     <tr>
       <td>Семинарные</td>

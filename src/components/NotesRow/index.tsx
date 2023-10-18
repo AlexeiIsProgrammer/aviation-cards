@@ -1,11 +1,23 @@
+import { ChangeEvent } from 'react';
 import { Form } from 'react-bootstrap';
-import { Subject } from '../../API/types/interfaces';
 import { useAppDispatch } from '../../hooks';
-import { updateSubject } from '../../store/slices/subjectsSlice';
+import { updateSubject } from '../../store/slices/subjectSlice';
+import { NotesRowProps } from './types/types';
 
-const NotesRow = ({ subject }: { subject: Subject }) => {
-  const { podgroups, additionalInfo, uniqueId } = subject;
+const NotesRow = ({ podgroups, additionalInfo, uniqueId }: NotesRowProps) => {
   const dispatch = useAppDispatch();
+
+  const changeNoteHandle = (e: ChangeEvent<HTMLTextAreaElement>) => {
+    dispatch(
+      updateSubject([
+        {
+          id: uniqueId,
+          action: 'additionalInfo',
+          value: e.target.value,
+        },
+      ])
+    );
+  };
 
   return (
     <tr>
@@ -14,17 +26,7 @@ const NotesRow = ({ subject }: { subject: Subject }) => {
       <td colSpan={podgroups.length}>
         <Form.Control
           value={additionalInfo}
-          onChange={(e) => {
-            dispatch(
-              updateSubject([
-                {
-                  id: uniqueId,
-                  action: 'additionalInfo',
-                  value: e.target.value,
-                },
-              ])
-            );
-          }}
+          onChange={changeNoteHandle}
           as="textarea"
           placeholder="Пишите примечания здесь"
         ></Form.Control>
