@@ -1,0 +1,16 @@
+.table__header {
+  border-bottom: 2px solid black;
+}
+.table__header th {
+  text-align: center;
+}
+
+.flex-centered-cell {
+  display: table-cell;
+  gap: 10px;
+}
+
+tr {
+  vertical-align: middle;
+  text-align: center;
+}
